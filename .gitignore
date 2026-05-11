@@ -1,0 +1,23 @@
+# Raw GPS & personal data — not committed
+data/race_day/
+data/processed/gpx_data.pkl
+data/processed/*.xlsx
+data/processed/~$*
+
+# Large media
+_drafts/
+*.mp4
+*.heic
+*.HEIC
+
+# System
+.DS_Store
+**/.DS_Store
+__pycache__/
+*.pyc
+*.ipynb_checkpoints/
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# Old notebook figures (regenerated on run)
+assignment_b/notebook/fig_*.png
