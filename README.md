@@ -22,17 +22,15 @@ On April 26, 2026, 25 runners lined up at the Lyngby Half Marathon. They had dif
 ## Repository Structure
 
 ```
-├── assignment_b/
-│   ├── website/
-│   │   └── index.html          ← Interactive website (self-contained, open in browser)
-│   └── notebook/
-│       └── explainer_notebook.ipynb
-│
+├── website/
+│   └── index.html              ← Interactive website (self-contained, open in browser)
+├── notebook/
+│   └── explainer_notebook.ipynb
 ├── data/
-│   └── processed/
-│       └── lyngby_runners_2026.csv   ← Master dataset (25 runners, 22 columns)
-│
-├── assignment_a/               ← Presentation slides
+│   ├── processed/
+│   │   └── lyngby_runners_2026.csv   ← Master dataset (25 runners, 22 columns)
+│   └── race_day/               ← Raw GPX files (gitignored)
+├── requirements.txt
 └── README.md
 ```
 
@@ -40,9 +38,18 @@ On April 26, 2026, 25 runners lined up at the Lyngby Half Marathon. They had dif
 
 ---
 
+## Setup
+
+```bash
+pip install -r requirements.txt
+jupyter notebook notebook/explainer_notebook.ipynb
+```
+
+---
+
 ## The Website
 
-Open `assignment_b/website/index.html` directly in any browser — no server needed.
+Open `website/index.html` directly in any browser — no server needed.
 
 **Features:** interactive runner profiles · GPS route heatmap per runner · 6,759-point elevation chart with synchronized map cursor · four myth sections · Copenhagen HM comparison.
 
