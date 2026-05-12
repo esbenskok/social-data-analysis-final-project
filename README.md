@@ -1,6 +1,6 @@
 # Testing Running Myths — Lyngby Half Marathon 2026
 
-**Social Data Analysis · DTU 2026 · Marta Arana · Esben · Sergi**
+**Social Data Analysis · DTU 2026 · Marta Arana · Esben Kok · Sergi Lupon**
 
 > *"We stopped arguing about running advice and decided to test it with data."*
 
@@ -69,5 +69,5 @@ Or open `docs/index.html` directly in any browser — no server needed.
 | | |
 |---|---|
 | **Marta Arana** | Data collection, GPX pipeline, hill training analysis, website design |
-| **Esben** | EDA, prediction model, Myth 3, Segal & Heer analysis |
-| **Sergi** | Course visualisations, Myth 1 & 4, interactive charts |
+| **Esben Kok** | EDA, prediction model, Myth 3, Segal & Heer analysis |
+| **Sergi Lupon** | Course visualisations, Myth 1 & 4, interactive charts |
