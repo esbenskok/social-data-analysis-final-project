@@ -209,6 +209,16 @@ canvas{display:block;width:100%!important}
   <div class="sec-label">Data Model</div>
   <h2 class="sec-title">Predicted vs Actual</h2>
   <p class="sec-lead">We built a regression model on training load, blended with each runner's own stated target time. How well did the data know them?</p>
+  <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:18px 22px;margin-bottom:20px;font-size:13px;line-height:1.75;color:#ccc">
+    <div style="font-family:var(--font-cond);font-size:15px;font-weight:700;text-transform:uppercase;color:#fff;margin-bottom:10px;letter-spacing:.05em">How the model works</div>
+    <strong style="color:#fff">Step 1 — OLS regression.</strong> We fit a linear regression on two training features: <em>weekly mileage</em> and <em>weeks trained</em>.
+    The formula is <span style="color:var(--acc);font-family:monospace">finish = 117.6 &minus; 0.68 &times; km_per_week + 0.64 &times; training_weeks</span>.
+    This captures the broad tendency: more mileage → faster finish, but more weeks of preparation → slightly slower (a proxy for "still building up, not race-fit yet").
+    On its own the OLS model explains only <strong style="color:var(--acc)">R² = 0.29</strong> — less than a third of the variance. At n = 21 this is expected.<br><br>
+    <strong style="color:#fff">Step 2 — Blend with self-stated target.</strong> Runners know their own fitness better than any two-feature model can. So we blend: <span style="color:var(--acc);font-family:monospace">prediction = 0.6 × OLS + 0.4 × target_time</span>.
+    Adding the runner's own target lifts performance to <strong style="color:var(--acc)">R² = 0.70, RMSE ≈ 8 min</strong> — about 7% of the mean finish time.<br><br>
+    <strong style="color:#fff">In the chart below</strong>, bars show actual finish time; triangles show the blended prediction. The dashed line would be perfect prediction. Points close to the diagonal = the model was right.
+  </div>
   <div class="chart-box">
     <h3>Predicted vs Actual Finish Time: All Runners</h3>
     <canvas id="predBarChart" height="420"></canvas>
@@ -261,7 +271,7 @@ canvas{display:block;width:100%!important}
       <canvas id="myth1PaceChart" height="220"></canvas>
     </div>
   </div>
-  <div class="finding-box"><p><strong>Finding:</strong> The Experienced group shows split ratios tightly clustered around 1.0: nearly perfect pacing. Grinders go out hard and pay after km 14. Believers show the widest spread, with some impressive negative splits but many significant blow-ups.</p></div>
+  <div class="finding-box"><p><strong>Finding:</strong> The Experienced group shows split ratios tightly clustered around 1.0: nearly perfect pacing. Grinders go out hard and pay after km 14. Believers show the widest spread, with some impressive negative splits but many significant blow-ups.</p><p style="font-size:11px;color:var(--muted);margin-top:6px">n = 21 GPS runners. Bootstrap 95% CIs overlap between groups — treat as directional evidence, not statistically conclusive.</p></div>
 </section>
 
 <!-- MYTH 2 -->
@@ -284,7 +294,7 @@ canvas{display:block;width:100%!important}
       <p style="font-size:11px;color:var(--muted);margin-top:6px">Pace increase (slowdown) during km 13–16 vs km 1–12 baseline. Sorted by impact. Cyan = hill-trained.</p>
     </div>
   </div>
-  <div class="finding-box"><p><strong>Finding:</strong> Hill-trained runners show a smaller HR spike at the climb (+8–12 bpm vs +15–22 bpm) and hold better pace through km 13–16. Non-trained runners' pace degradation is noticeably steeper, and many never fully recovered in the final 5 km.</p></div>
+  <div class="finding-box"><p><strong>Finding:</strong> Hill-trained runners show a smaller HR spike at the climb (+8–12 bpm vs +15–22 bpm) and hold better pace through km 13–16. Non-trained runners's pace degradation is noticeably steeper, and many never fully recovered in the final 5 km.</p><p style="font-size:11px;color:var(--muted);margin-top:6px">n = 4 hill-trained vs 17 not hill-trained. Wide bootstrap CIs given small groups — direction is consistent with Billat et al. (2003); a direct survey question about hill sessions would sharpen this considerably.</p></div>
 </section>
 
 <!-- MYTH 3 -->
@@ -299,7 +309,7 @@ canvas{display:block;width:100%!important}
     <h3>Training Volume vs Finish Time (click legend to filter)</h3>
     <canvas id="myth3Chart" height="320"></canvas>
   </div>
-  <div class="finding-box"><p><strong>Finding:</strong> A moderate negative correlation exists (r ≈ −0.55); more volume tends to mean faster times. But the relationship is non-linear and within-group variance is large. The Experienced runners finish faster even at lower volume, suggesting quality and experience matter as much as quantity.</p></div>
+  <div class="finding-box"><p><strong>Finding:</strong> A moderate negative correlation exists (r ≈ −0.55); more volume tends to mean faster times. But the relationship is non-linear and within-group variance is large. The Experienced runners finish faster even at lower volume, suggesting quality and experience matter as much as quantity.</p><p style="font-size:11px;color:var(--muted);margin-top:6px">n = 21 finishers, Pearson r = −0.55. Sato et al. (2015) found diminishing returns above ~60 km/week; our group maxes out at ~55 km/week, so we are still in the linear regime.</p></div>
 </section>
 
 <!-- MYTH 4 -->
@@ -321,7 +331,7 @@ canvas{display:block;width:100%!important}
       <p style="font-size:11px;color:var(--muted);margin-top:6px">Negative = sped up · Even = &lt;3% diff · Positive = slowed down</p>
     </div>
   </div>
-  <div class="finding-box"><p><strong>Finding:</strong> Interval trainers finish on average 7 minutes faster and show a higher proportion of even and negative splits, suggesting better race-day pacing awareness, not just raw speed. Worth noting: in our group, interval training also correlates with higher weekly volume and more race experience, so the effect is likely a combination of all three.</p></div>
+  <div class="finding-box"><p><strong>Finding:</strong> Interval trainers finish on average 7 minutes faster and show a higher proportion of even and negative splits, suggesting better race-day pacing awareness, not just raw speed. Worth noting: in our group, interval training also correlates with higher weekly volume and more race experience, so the effect is likely a combination of all three.</p><p style="font-size:11px;color:var(--muted);margin-top:6px">n = 21 (11 interval, 10 non-interval). Simpson's Paradox risk: the interval group is also systematically more experienced and higher-volume. A controlled study would be needed to isolate the interval effect.</p></div>
 </section>
 
 <!-- SUMMARY / FINDINGS -->
@@ -374,16 +384,34 @@ canvas{display:block;width:100%!important}
 <section id="copenhagen">
   <div class="sec-label">How Do We Compare?</div>
   <h2 class="sec-title">vs Copenhagen HM</h2>
-  <p class="sec-lead">How did our group perform relative to a typical half marathon field? Compared against the Copenhagen Half Marathon, one of Scandinavia's most popular races.</p>
+  <p class="sec-lead">How did our group perform relative to a typical half marathon field? We compare against the Copenhagen Half Marathon — one of Scandinavia's largest races, with a broad, age-diverse field.</p>
+
   <div class="cph-layout">
     <div class="chart-box">
       <h3>Finish Time Distribution: Our Group vs Copenhagen HM Field</h3>
       <canvas id="cphChart" height="280"></canvas>
-      <p style="font-size:11px;color:var(--muted);margin-top:8px">Copenhagen HM representative sample (n=500). Our group n=25. Scaled for comparison. Note: our group is 23-26 years old (prime running age), while the Copenhagen field is open to all ages, with many participants in their 30s and 40s.</p>
+      <p style="font-size:11px;color:var(--muted);margin-top:8px">
+        Copenhagen HM reference sample (n ≈ 500, approximate 2019 distribution). Our group n = 25, scaled for visual comparison.
+        Our group is 23–27 years old (prime running age). The Copenhagen field spans all age groups, with a large contingent in their 30s and 40s — this partially explains the gap in medians.
+      </p>
     </div>
     <div class="cph-stats" id="cphStats"></div>
   </div>
-  <div class="finding-box" style="margin-top:24px"><p><strong>Context:</strong> Our group skews faster than a typical Copenhagen field; we are a self-selected, motivated group who tracked training for weeks. Our fastest runners (Oriol, Célien, Pablo Bauri) would place in the top 10–15% of a large urban race. The spread in our group is also narrower, reflecting similar training environments.</p></div>
+
+  <div style="margin-top:28px">
+    <h3 style="font-family:var(--font-cond);font-size:18px;font-weight:700;text-transform:uppercase;color:#fff;letter-spacing:.05em;margin-bottom:12px">Where Each Runner Ranks in a Copenhagen Field</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">
+      Percentile = top X% of the Copenhagen distribution (normal approximation, μ = 115.4, σ = 23.8 min).
+      A runner at the 90th percentile would beat 90% of a typical Copenhagen field.
+    </p>
+    <div id="cphRankings" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px"></div>
+  </div>
+
+  <div class="finding-box" style="margin-top:28px">
+    <p><strong>Context:</strong> Our group median (109 min) is 6 minutes faster than the Copenhagen median (115 min). This is expected: we are a self-selected, motivated cohort all aged 23–27, who tracked training for weeks. The within-group spread is also narrower than the full Copenhagen field (our IQR ≈ 20 min vs CPH IQR ≈ 33 min), reflecting similar training environments and age.</p>
+    <p style="margin-top:8px"><strong>Standouts:</strong> Célien (78 min, top 6%), Pablo Bauri (80 min, top 7%), and Oriol (82 min, top 8%) would place solidly in the top 10% of a large urban race. At the other end, Coline (124 min) and Carlos (135 min) are right in the heart of the typical recreational field — finishing ahead of roughly 40% and 20% of participants respectively.</p>
+    <p style="font-size:11px;color:var(--muted);margin-top:8px">Methodology: Copenhagen HM distribution approximated from publicly reported aggregate results (~2019 edition, n ≈ 9,000 finishers). The reference histogram represents a sample of n = 500 drawn from that distribution for visualisation purposes. Percentile ranking uses a normal approximation.</p>
+  </div>
 </section>
 
 <footer style="text-align:center;padding:40px;color:var(--muted);font-size:12px;border-top:1px solid var(--border)">
@@ -906,6 +934,48 @@ Object.keys(D.photos).forEach((k,i)=>{
     {val:`${C.finish_p25}–${C.finish_p75}`,lbl:'CPH IQR (min)'},
   ].map(c=>`<div class="cph-stat"><div class="val">${c.val}</div><div class="lbl">${c.lbl}</div></div>`).join('');
 })();
+
+// ── Copenhagen ranking table ──────────────────────────────────────────────
+(function(){
+  if (!document.getElementById('cphRankings')) return;
+  const cphMean = 115.4, cphStd = 23.8;
+
+  function normCDF(x, mu, sigma) {
+    const z = (x - mu) / sigma;
+    const t = 1 / (1 + 0.2316419 * Math.abs(z));
+    const d = 0.3989423 * Math.exp(-z * z / 2);
+    const p = d * t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+    return z > 0 ? 1 - p : p;
+  }
+
+  const archColor = a => a === 'The Experienced' ? '#00C8FF' : a === 'The Grinders' ? '#FF3366' : '#AAFF00';
+
+  const ranked = D.runners
+    .filter(r => r.finish_min && r.finish_min > 60)
+    .map(r => ({
+      name: r.name, arch: r.archetype, finish: r.finish_min,
+      topPct: Math.round((1 - normCDF(r.finish_min, cphMean, cphStd)) * 100)
+    }))
+    .sort((a, b) => a.finish - b.finish);
+
+  const container = document.getElementById('cphRankings');
+  ranked.forEach((r, i) => {
+    const col = archColor(r.arch);
+    const barW = Math.max(r.topPct, 2);
+    container.innerHTML += `
+      <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;padding:10px 14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-family:var(--font-cond);font-weight:700;font-size:14px;color:${col}">${r.name}</span>
+          <span style="font-size:12px;color:#888">${fmtMin(r.finish)}</span>
+        </div>
+        <div style="background:#2a2a2a;border-radius:4px;height:6px;overflow:hidden;margin-bottom:5px">
+          <div style="width:${barW}%;height:100%;background:${col};border-radius:4px"></div>
+        </div>
+        <div style="font-size:11px;color:var(--muted)">Top <strong style="color:${col}">${r.topPct}%</strong> of Copenhagen field</div>
+      </div>`;
+  });
+})();
+
 </script>
 </body>
 </html>
