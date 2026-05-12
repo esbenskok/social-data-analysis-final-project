@@ -29,7 +29,7 @@ nav a:hover{color:var(--acc)}
 
 /* HERO */
 #hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden;padding-top:80px}
-.hero-bg{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);z-index:0}
+.hero-bg{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);z-index:0}
 .hero-bg div{background-size:cover;background-position:center;filter:grayscale(55%) brightness(.35)}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 50%,rgba(10,10,10,.05) 0%,rgba(10,10,10,.82) 60%)}
 .hero-content{position:relative;z-index:2;padding:0 40px;max-width:860px;display:flex;flex-direction:column;align-items:center}
@@ -422,10 +422,10 @@ function fmtMin(m){const h=Math.floor(m/60),mn=Math.floor(m%60);return `${h}:${S
 
 // ── HERO PHOTOS ───────────────────────────────────────────────────────────
 const heroBg=document.getElementById('heroBg');
-Object.keys(D.photos).forEach(k=>{
+Object.keys(D.photos).filter(k=>k!=='finish_hero').slice(0,3).forEach(k=>{
   const d=document.createElement('div');
   d.style.backgroundImage=`url(data:image/jpeg;base64,${D.photos[k]})`;
-  d.style.backgroundPosition=k==='race5'?'center top':'center center';
+  d.style.backgroundPosition='center center';
   heroBg.appendChild(d);
 });
 
