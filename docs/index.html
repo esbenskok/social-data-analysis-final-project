@@ -924,15 +924,6 @@ elevChart.draw=function(){
 
 // ── SUMMARY PHOTOS ────────────────────────────────────────────────────────
 const spEl=document.getElementById('summaryPhotos');
-// Finish hero first, then race photos
-if(D.photos.finish_hero){
-  const hero=document.createElement('img');
-  hero.src=`data:image/jpeg;base64,${D.photos.finish_hero}`;
-  hero.alt='Crossing the finish line — Lyngby Half Marathon 2026';
-  hero.className='hero-finish';
-  hero.title='The finish arch. Every second mattered.';
-  spEl.appendChild(hero);
-}
 Object.keys(D.photos).filter(k=>k!=='finish_hero').forEach((k,i)=>{
   const img=document.createElement('img');
   img.src=`data:image/jpeg;base64,${D.photos[k]}`;
