@@ -682,27 +682,18 @@ elevChart.draw=function(){
       ctx.setLineDash([]);
       ctx.fillStyle=ACC;ctx.font='bold 9px sans-serif';ctx.textAlign='center';
       ctx.fillText('even split',xE,chartArea.top+10);
-      // Group mean lines + diamond markers
-      const yFrac=[0.2,0.5,0.78];
+      // Group mean lines (solid, colored)
+      const yFrac=[0.1,0.35,0.6];
       arch_order.forEach((arch,ai)=>{
         const rs=runners.filter(r=>r.archetype===arch);
         const mean=rs.reduce((s,r)=>s+r.split_ratio,0)/rs.length;
         const xPx=scales.x.getPixelForValue(mean);
         const col=ARCH_C[arch];
-        const yPx=chartArea.top+(chartArea.bottom-chartArea.top)*yFrac[ai];
-        // Vertical mean line
-        ctx.strokeStyle=col;ctx.lineWidth=2;ctx.globalAlpha=0.55;
+        ctx.strokeStyle=col;ctx.lineWidth=2.5;
         ctx.beginPath();ctx.moveTo(xPx,chartArea.top);ctx.lineTo(xPx,chartArea.bottom);ctx.stroke();
-        ctx.globalAlpha=1;
-        // Diamond marker
-        ctx.fillStyle=col;ctx.strokeStyle='#111';ctx.lineWidth=1.5;
-        ctx.beginPath();
-        ctx.moveTo(xPx,yPx-9);ctx.lineTo(xPx+7,yPx);
-        ctx.lineTo(xPx,yPx+9);ctx.lineTo(xPx-7,yPx);
-        ctx.closePath();ctx.fill();ctx.stroke();
-        // Label to the right
-        ctx.fillStyle=col;ctx.font='bold 10px sans-serif';ctx.textAlign='left';ctx.strokeStyle='transparent';
-        ctx.fillText(`${arch.replace('The ','')} avg: ${mean.toFixed(3)}`,xPx+10,yPx+4);
+        const yLabel=chartArea.top+(chartArea.bottom-chartArea.top)*yFrac[ai];
+        ctx.fillStyle=col;ctx.font='bold 10px sans-serif';ctx.textAlign='left';
+        ctx.fillText(`${arch.replace('The ','')} avg: ${mean.toFixed(3)}`,xPx+5,yLabel);
       });
       ctx.restore();
     }
@@ -715,7 +706,7 @@ elevChart.draw=function(){
         tooltip:{callbacks:{label:ctx=>`${ctx.raw.label}: ${ctx.raw.x?.toFixed(3)}`}},
       },
       scales:{
-        x:{title:{display:true,text:'Split Ratio (2nd half / 1st half)'},grid:{color:BRD},min:0.88,max:1.22},
+        x:{title:{display:true,text:'Split Ratio (2nd half / 1st half)'},grid:{color:BRD},min:0.88,max:1.35},
         y:{display:false},
       }
     },
