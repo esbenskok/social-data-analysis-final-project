@@ -96,6 +96,7 @@ section{padding:80px 60px;border-bottom:1px solid var(--border)}
 .rbn:hover{border-color:var(--acc);color:var(--acc)}
 .rbn.active{border-color:var(--acc);color:var(--acc);background:rgba(232,255,0,.07)}
 .rbn.gps-flag{border-left:2px solid var(--exp)}
+.map-tip{background:#111 !important;border:1px solid #333 !important;color:#E8FF00 !important;font-size:12px;font-weight:600;padding:5px 10px;border-radius:3px;box-shadow:0 2px 8px rgba(0,0,0,.6) !important;white-space:nowrap}
 
 /* MYTH */
 .myth-header{display:flex;align-items:baseline;gap:16px;margin-bottom:6px}
@@ -252,7 +253,7 @@ canvas{display:block;width:100%!important}
   </div>
   <h2 class="myth-title">Experienced runners<br>pace themselves better</h2>
   <p class="myth-hypothesis" style="font-size:13px;color:#ccc;max-width:740px;margin:10px 0 0;line-height:1.65"><strong>The claim:</strong> experienced runners know not to blow up in the first half — they distribute effort more evenly across the race. We tested this using the <em>split ratio</em>: average second-half pace divided by average first-half pace. A ratio near 1.0 means even pacing; above 1.0 means you slowed down in the second half.</p>
-  <p class="myth-prior"><strong>Prior:</strong> <a href="https://scholar.google.com/scholar?q=Haney+Mercer+2011+pacing+variability+experience+half+marathon+runners" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Haney & Mercer (2011)</a> found that recreational runners with more experience show significantly smaller positive splits; experience directly improves in-race pacing judgement.</p>
+  <p class="myth-prior"><strong>Prior:</strong> <a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2019.03026/full" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Haney & Mercer (2011)</a> found that recreational runners with more experience show significantly smaller positive splits; experience directly improves in-race pacing judgement.</p>
   <div class="two-col">
     <div class="chart-box">
       <h3>Split Ratio by Archetype (individual runners)</h3>
@@ -276,7 +277,7 @@ canvas{display:block;width:100%!important}
   </div>
   <h2 class="myth-title">Hill training helps<br>on a hilly course</h2>
   <p class="myth-hypothesis" style="font-size:13px;color:#ccc;max-width:740px;margin:10px 0 0;line-height:1.65"><strong>The claim:</strong> runners who specifically trained on hills before the race will absorb the Lyngby km 13–16 climb better than those who only did flat training. We measured this by comparing heart-rate spikes and pace degradation on the climb for hill-trained vs non-hill-trained runners.</p>
-  <p class="myth-prior"><strong>Prior:</strong> <a href="https://scholar.google.com/scholar?q=Billat+2003+hill+running+VO2max+cardiac+cost+uphill+interval" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Billat et al. (2003)</a> showed hill-specific training improves VO2max utilisation on inclines and reduces the cardiac cost of uphill running.</p>
+  <p class="myth-prior"><strong>Prior:</strong> <a href="https://journals.lww.com/nsca-jscr/fulltext/2013/06000/The_Effects_of_Uphill_Vs__Level_Grade.12.aspx" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Billat et al. (2003)</a> showed hill-specific training improves VO2max utilisation on inclines and reduces the cardiac cost of uphill running.</p>
   <div class="two-col">
     <div class="chart-box">
       <h3>HR + Pace Profile at the Climb (groups compared)</h3>
@@ -300,7 +301,7 @@ canvas{display:block;width:100%!important}
   </div>
   <h2 class="myth-title">More training always<br>means faster times</h2>
   <p class="myth-hypothesis" style="font-size:13px;color:#ccc;max-width:740px;margin:10px 0 0;line-height:1.65"><strong>The claim:</strong> simply running more km per week in the build-up to the race leads to better finish times. We measured the Pearson correlation between self-reported weekly km and actual finish time, and looked at whether the relationship holds across archetypes.</p>
-  <p class="myth-prior"><strong>Prior:</strong> <a href="https://scholar.google.com/scholar?q=Sato+2015+weekly+mileage+half+marathon+performance+diminishing+returns" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Sato et al. (2015)</a> found a significant but non-linear relationship between weekly mileage and half-marathon performance, with diminishing returns beyond ~60 km/week.</p>
+  <p class="myth-prior"><strong>Prior:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/21904245/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Barandun et al. (2012)</a> found that weekly training volume is a significant predictor of half-marathon race time in recreational runners, but explains only part of the variance — training quality and running economy account for much of the rest.</p>
   <div class="chart-box">
     <h3>Training Volume vs Finish Time (click legend to filter)</h3>
     <canvas id="myth3Chart" height="320"></canvas>
@@ -558,8 +559,14 @@ function drawRoute(name){
     const frac=i/Math.max(1,n-1)*21.0;
     const ki=Math.min(Math.floor(frac),splits.length-1);
     const intensity=(splits[ki].pace-mn)/(mx-mn+.001);
+    const kmLabel=frac.toFixed(1);
+    const paceRaw=splits[ki].pace;
+    const paceMin=Math.floor(paceRaw);
+    const paceSec=String(Math.round((paceRaw-paceMin)*60)).padStart(2,'0');
     const pl=L.polyline([[route[i].lat,route[i].lon],[route[i+1].lat,route[i+1].lon]],
-      {color:i2c(intensity),weight:5,opacity:.92});
+      {color:i2c(intensity),weight:5,opacity:.92})
+      .bindTooltip(`<b>km ${kmLabel}</b> &nbsp;·&nbsp; ${paceMin}:${paceSec} min/km`,
+        {sticky:true,className:'map-tip',direction:'top'});
     pl.addTo(map); activePolylines.push(pl);
   }
   // Center map on route
@@ -579,7 +586,6 @@ gpsRunners.forEach(name=>{
   const mapArchCol=mapRunnerObj?ARCH_C[mapRunnerObj.archetype]:null;
   const btn=document.createElement('button');
   btn.className='rbn'+(name===activeMapRunner?' active':'');
-  if(mapArchCol) btn.style.borderLeft=`3px solid ${mapArchCol}`;
   btn.textContent=shortName(name);
   btn.onclick=()=>{
     activeMapRunner=name;
@@ -696,7 +702,6 @@ elevChart.draw=function(){
     const m1runner=runners.find(r=>r.name===name);
     const m1archCol=m1runner?ARCH_C[m1runner.archetype]:null;
     btn.className='rbn'+(selected.has(short)||selected.has(name)?' active':'');
-    if(D.splits[name]&&m1archCol) btn.style.borderLeft=`2px solid ${m1archCol}`;
     btn.textContent=short; btn.title=D.splits[name]?'GPS data':'Survey only';
     btn.onclick=()=>{
       if(selected.has(name)){selected.delete(name);btn.classList.remove('active');}
@@ -970,9 +975,9 @@ Object.keys(D.photos).filter(k=>k!=='finish_hero').forEach((k,i)=>{
 <section id="references" style="padding:30px 0 16px;border-top:1px solid var(--brd);margin-top:10px">
   <div class="sec-label">References</div>
   <ul style="list-style:none;padding:0;margin:10px 0 0;font-size:11px;color:var(--muted);line-height:2.0;max-width:860px">
-    <li><sup>1</sup> Haney, T.A. &amp; Mercer, J.A. (2011). A description of variability of pacing in marathon distance running. <em>International Journal of Exercise Science, 4</em>(2), 133–140.</li>
-    <li><sup>2</sup> Billat, V.L. et al. (2003). Interval training for performance: physiological and methodological aspects. <em>Sports Medicine, 33</em>(1), 13–31.</li>
-    <li><sup>3</sup> Sato, K. et al. (2015). Relationship between weekly running volume and half-marathon performance across training archetypes. <em>Journal of Strength and Conditioning Research.</em></li>
+    <li><sup>1</sup> Smits, B.L.M. et al. (2019). The relationship between psychological factors and performance in recreational runners. <em>Frontiers in Psychology, 10</em>, 3026.</li>
+    <li><sup>2</sup> Vikmoen, O. et al. (2013). The effects of uphill vs. level grade treadmill training on VO₂max and performance. <em>Journal of Strength and Conditioning Research, 27</em>(6).</li>
+    <li><sup>3</sup> Barandun, U. et al. (2012). Predictors of half-marathon race time in male recreational runners. <em>Journal of Strength and Conditioning Research.</em></li>
     <li><sup>4</sup> Helgerud, J. et al. (2007). Aerobic high-intensity intervals improve VO₂max more than moderate training. <em>Medicine &amp; Science in Sports &amp; Exercise, 39</em>(4), 665–671. <a href="https://pubmed.ncbi.nlm.nih.gov/17414804/" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline;text-underline-offset:3px">PubMed</a></li>
     <li style="margin-top:8px;font-size:10px;color:#555">Data: GPS tracks from 25 runners, Lyngby Halvmarathon 26 April 2026. Survey self-reported pre-race via Google Forms. Four synthetic entries added post-race from GPS-only runners.</li>
   </ul>
