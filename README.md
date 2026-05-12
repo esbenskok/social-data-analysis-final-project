@@ -22,19 +22,20 @@ On April 26, 2026, 25 runners lined up at the Lyngby Half Marathon. They had dif
 ## Repository Structure
 
 ```
-├── website/
-│   └── index.html              ← Interactive website (self-contained, open in browser)
+├── docs/
+│   └── index.html              ← Interactive website (GitHub Pages — live site)
 ├── notebook/
 │   └── explainer_notebook.ipynb
 ├── data/
 │   ├── processed/
-│   │   └── lyngby_runners_2026.csv   ← Master dataset (25 runners, 22 columns)
-│   └── race_day/               ← Raw GPX files (gitignored)
+│   │   ├── lyngby_runners_2026.csv   ← Master dataset (25 runners, 22 columns)
+│   │   └── 🏃 Lyngby Halvmarathon 2026 — Datos del corredor (respuestas).xlsx
+│   └── race_day/               ← Raw GPX files (25 runner folders)
 ├── requirements.txt
 └── README.md
 ```
 
-> Raw GPX files and personal photos are gitignored. The website is fully self-contained — photos and map data are embedded.
+> The website is fully self-contained — photos and map data are embedded. Also available at the live URL below.
 
 ---
 
@@ -49,7 +50,9 @@ jupyter notebook notebook/explainer_notebook.ipynb
 
 ## The Website
 
-Open `website/index.html` directly in any browser — no server needed.
+**Live:** https://esbenskok.github.io/social-data-analysis-final-project/
+
+Or open `docs/index.html` directly in any browser — no server needed.
 
 **Features:** interactive runner profiles · GPS route heatmap per runner · 6,759-point elevation chart with synchronized map cursor · four myth sections · Copenhagen HM comparison.
 
