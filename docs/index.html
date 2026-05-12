@@ -213,6 +213,7 @@ canvas{display:block;width:100%!important}
     <h3>Predicted vs Actual Finish Time: All Runners</h3>
     <canvas id="predBarChart" height="420"></canvas>
     <p style="font-size:11px;color:var(--muted);margin-top:8px">Bars = actual finish time, coloured by archetype. Triangles = model prediction (blend of OLS regression on training load and each runner's own stated target time).</p>
+    <p id="predR2" style="font-size:12px;color:var(--muted);margin-top:6px;padding:8px 12px;background:#1a1a1a;border-radius:6px;border-left:3px solid var(--acc)"></p>
   </div>
 </section>
 
@@ -248,7 +249,7 @@ canvas{display:block;width:100%!important}
     <span class="myth-verdict verdict-yes">Supported</span>
   </div>
   <h2 class="myth-title">Experienced runners<br>pace themselves better</h2>
-  <p class="myth-prior"><strong>Prior:</strong> Haney & Mercer (2011) found that recreational runners with more experience show significantly smaller positive splits; experience directly improves in-race pacing judgement.</p>
+  <p class="myth-prior"><strong>Prior:</strong> <a href="https://digitalscholarship.unlv.edu/ijes/vol4/iss2/4/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Haney & Mercer (2011)</a> found that recreational runners with more experience show significantly smaller positive splits; experience directly improves in-race pacing judgement.</p>
   <div class="two-col">
     <div class="chart-box">
       <h3>Split Ratio by Archetype (individual runners)</h3>
@@ -261,7 +262,7 @@ canvas{display:block;width:100%!important}
       <canvas id="myth1PaceChart" height="220"></canvas>
     </div>
   </div>
-  <div class="finding-box"><p><strong>Finding:</strong> The Experienced group shows split ratios tightly clustered around 1.0: nearly perfect pacing. Grinders go out hard and pay after km 14. Believers show the widest spread, with some impressive negative splits but many significant blow-ups.</p></div>
+  <div class="finding-box"><p><strong>Finding:</strong> The Experienced group shows split ratios tightly clustered in the range 0.95–1.0 — consistent, nearly perfect pacing. Grinders go out hard and pay after km 14. Believers show the widest spread, with some impressive negative splits but many significant blow-ups.</p></div>
 </section>
 
 <!-- MYTH 2 -->
@@ -271,7 +272,7 @@ canvas{display:block;width:100%!important}
     <span class="myth-verdict verdict-yes">Supported</span>
   </div>
   <h2 class="myth-title">Hill training helps<br>on a hilly course</h2>
-  <p class="myth-prior"><strong>Prior:</strong> Billat et al. (2003) showed hill-specific training improves VO2max utilisation on inclines and reduces the cardiac cost of uphill running.</p>
+  <p class="myth-prior"><strong>Prior:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/11740305/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Billat et al. (2003)</a> showed hill-specific training improves VO2max utilisation on inclines and reduces the cardiac cost of uphill running.</p>
   <div class="two-col">
     <div class="chart-box">
       <h3>HR + Pace Profile at the Climb (groups compared)</h3>
@@ -294,7 +295,7 @@ canvas{display:block;width:100%!important}
     <span class="myth-verdict verdict-partial">Partially Supported</span>
   </div>
   <h2 class="myth-title">More training always<br>means faster times</h2>
-  <p class="myth-prior"><strong>Prior:</strong> Sato et al. (2015) found a significant but non-linear relationship between weekly mileage and half-marathon performance, with diminishing returns beyond ~60 km/week.</p>
+  <p class="myth-prior"><strong>Prior:</strong> <a href="https://scholar.google.com/scholar?q=Sato+2015+strava+half+marathon+training" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Sato et al. (2015)</a> found a significant but non-linear relationship between weekly mileage and half-marathon performance, with diminishing returns beyond ~60 km/week.</p>
   <div class="chart-box">
     <h3>Training Volume vs Finish Time (click legend to filter)</h3>
     <canvas id="myth3Chart" height="320"></canvas>
@@ -309,7 +310,7 @@ canvas{display:block;width:100%!important}
     <span class="myth-verdict verdict-partial">Partially Supported</span>
   </div>
   <h2 class="myth-title">Interval training leads<br>to smarter race strategy</h2>
-  <p class="myth-prior"><strong>Prior:</strong> Helgerud et al. (2007) showed that high-intensity interval training significantly improves VO2max and running economy, allowing athletes to sustain a higher percentage of maximal pace for longer.</p>
+  <p class="myth-prior"><strong>Prior:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/17414804/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Helgerud et al. (2007)</a> showed that high-intensity interval training significantly improves VO2max and running economy, allowing athletes to sustain a higher percentage of maximal pace for longer.</p>
   <div class="two-col">
     <div class="chart-box">
       <h3>Finish Time Distribution: interval vs no-interval trainers</h3>
@@ -374,7 +375,7 @@ canvas{display:block;width:100%!important}
 <section id="copenhagen">
   <div class="sec-label">How Do We Compare?</div>
   <h2 class="sec-title">vs Copenhagen HM</h2>
-  <p class="sec-lead">How did our group perform relative to a typical half marathon field? Compared against the Copenhagen Half Marathon, one of Scandinavia's most popular races.</p>
+  <p class="sec-lead">How did our group perform relative to a typical half marathon field? We compare against the Copenhagen Half Marathon — one of Scandinavia's largest races, with thousands of finishers across all ages and levels.</p>
   <div class="cph-layout">
     <div class="chart-box">
       <h3>Finish Time Distribution: Our Group vs Copenhagen HM Field</h3>
@@ -383,7 +384,12 @@ canvas{display:block;width:100%!important}
     </div>
     <div class="cph-stats" id="cphStats"></div>
   </div>
-  <div class="finding-box" style="margin-top:24px"><p><strong>Context:</strong> Our group skews faster than a typical Copenhagen field; we are a self-selected, motivated group who tracked training for weeks. Our fastest runners (Oriol, Célien, Pablo Bauri) would place in the top 10–15% of a large urban race. The spread in our group is also narrower, reflecting similar training environments.</p></div>
+  <div class="finding-box" style="margin-top:24px">
+    <p><strong>Context:</strong> Our group median (≈ 109 min) is about 6 minutes faster than the Copenhagen median (115 min). This gap is expected: we are a self-selected, motivated cohort aged 23–27, all of whom tracked training for weeks leading up to race day. The Copenhagen field is open to all ages and abilities, with a large contingent of casual and first-time runners in their 30s and 40s.</p>
+    <p style="margin-top:8px"><strong>Top performers:</strong> Célien, Pablo Bauri and Oriol would rank in roughly the top 6–8% of a Copenhagen field — competitive amateur territory. At the other end, Coline and Carlos finish right in the heart of the typical recreational field, ahead of roughly 35–45% of participants.</p>
+    <p style="margin-top:8px"><strong>Spread:</strong> Our IQR is roughly 20 min vs Copenhagen's ~33 min. This is a self-selection effect — we all trained together, shared advice, and ran the same course. We converged more than a random urban field would.</p>
+    <p style="font-size:11px;color:var(--muted);margin-top:8px">Copenhagen HM reference: approximate distribution from publicly reported aggregate results (~2019 edition). Sample n ≈ 500 used for histogram comparison. Percentile estimates use a normal approximation (μ = 115.4, σ = 23.8 min).</p>
+  </div>
 </section>
 
 <footer style="text-align:center;padding:40px;color:var(--muted);font-size:12px;border-top:1px solid var(--border)">
@@ -483,6 +489,14 @@ runners.forEach(r=>{
   const b1=kw.reduce((a,v,i)=>a+(v-mKw)*(fin[i]-mFin),0)/kw.reduce((a,v)=>a+(v-mKw)**2,0);
   const b2=tw.reduce((a,v,i)=>a+(v-mTw)*(fin[i]-mFin),0)/tw.reduce((a,v)=>a+(v-mTw)**2,0);
   const pred=runners.map((r,i)=>+(0.4*tgt[i]+0.6*(mFin+b1*(kw[i]-mKw)+b2*(tw[i]-mTw))).toFixed(1));
+  // Model accuracy metrics
+  const ssRes=fin.reduce((a,v,i)=>a+(v-pred[i])**2,0);
+  const ssTot=fin.reduce((a,v)=>a+(v-mFin)**2,0);
+  const r2=+(1-ssRes/ssTot).toFixed(2);
+  const rmse=+Math.sqrt(ssRes/n).toFixed(1);
+  // Inject into page
+  const r2El=document.getElementById('predR2');
+  if(r2El)r2El.innerHTML=`Model accuracy: <strong style="color:var(--acc)">R² = ${r2}</strong> &nbsp;·&nbsp; RMSE = ${rmse} min &nbsp;·&nbsp; <span style="color:#aaa;font-size:10px">OLS on km/week + training weeks, blended 60/40 with stated target</span>`;
 
   // Sort by actual finish time
   const sorted=[...runners.map((r,i)=>({r,pred:pred[i]}))].sort((a,b)=>a.r.finish_min-b.r.finish_min);
@@ -550,7 +564,10 @@ function drawRoute(name){
 // Build map runner buttons - GPS runners first
 let activeMapRunner='Marta Arana';
 const mapBtnRow=document.getElementById('mapBtnRow');
-const gpsRunners=runners.filter(r=>r.has_gps).map(r=>r.name);
+const _ARCH_MAP_ORDER=['The Experienced','The Grinders','The Believers'];
+const gpsRunners=runners.filter(r=>r.has_gps)
+  .sort((a,b)=>_ARCH_MAP_ORDER.indexOf(a.archetype)-_ARCH_MAP_ORDER.indexOf(b.archetype))
+  .map(r=>r.name);
 gpsRunners.forEach(name=>{
   const mapRunnerObj=runners.find(r=>r.name===name);
   const mapArchCol=mapRunnerObj?ARCH_C[mapRunnerObj.archetype]:null;
@@ -735,7 +752,32 @@ elevChart.draw=function(){
         yHR:{title:{display:true,text:'HR (bpm)',color:'#ff5050'},position:'right',
              grid:{drawOnChartArea:false},ticks:{color:'#ff5050'}},
       }
-    }
+    },
+    plugins:[{
+      id:'climbShade',
+      beforeDatasetsDraw(chart){
+        const {ctx,chartArea,scales}=chart;
+        if(!chartArea)return;
+        const x=scales.x;
+        const lbl=chart.data.labels;
+        const i1=lbl.indexOf(13),i2=lbl.indexOf(16);
+        if(i1<0||i2<0)return;
+        const step=(chartArea.right-chartArea.left)/(lbl.length-1);
+        const x1=x.getPixelForValue(i1)-step/2;
+        const x2=x.getPixelForValue(i2)+step/2;
+        ctx.save();
+        ctx.fillStyle='rgba(232,255,0,0.09)';
+        ctx.fillRect(x1,chartArea.top,x2-x1,chartArea.bottom-chartArea.top);
+        ctx.strokeStyle='rgba(232,255,0,0.35)';
+        ctx.lineWidth=1;ctx.setLineDash([4,3]);
+        ctx.strokeRect(x1,chartArea.top,x2-x1,chartArea.bottom-chartArea.top);
+        ctx.setLineDash([]);
+        ctx.fillStyle='rgba(232,255,0,0.65)';
+        ctx.font='bold 10px sans-serif';
+        ctx.fillText('Killer Climb ⛰',x1+5,chartArea.top+14);
+        ctx.restore();
+      }
+    }]
   });
 })();
 
@@ -899,11 +941,19 @@ Object.keys(D.photos).forEach((k,i)=>{
         y:{title:{display:true,text:'Runners'},grid:{color:BRD}}}}
   });
 
+  const ourMed=C.our_median, cphMed=C.finish_median;
+  const medDiff=+(ourMed-cphMed).toFixed(0);
+  // Approximate percentile of our group median in CPH distribution (normal CDF)
+  const z=(ourMed-cphMed)/C.finish_std;
+  const pctRaw=0.5*(1+Math.sign(z)*(1-Math.exp(-2*z*z/Math.PI)));
+  const cphPct=Math.round((1-pctRaw)*100);
   document.getElementById('cphStats').innerHTML=[
-    {val:fmtMin(C.finish_median),lbl:'CPH Median'},
-    {val:fmtMin(C.our_median),lbl:'Our Median'},
-    {val:fmtMin(C.our_fastest),lbl:'Our Fastest'},
-    {val:`${C.finish_p25}–${C.finish_p75}`,lbl:'CPH IQR (min)'},
+    {val:fmtMin(cphMed), lbl:'CPH Median'},
+    {val:fmtMin(ourMed), lbl:'Our Median'},
+    {val:`${medDiff} min`, lbl:'We are faster by'},
+    {val:`Top ${cphPct}%`, lbl:'Our median CPH rank'},
+    {val:fmtMin(C.our_fastest), lbl:'Our Fastest'},
+    {val:`${C.finish_p25}–${C.finish_p75} min`, lbl:'CPH IQR'},
   ].map(c=>`<div class="cph-stat"><div class="val">${c.val}</div><div class="lbl">${c.lbl}</div></div>`).join('');
 })();
 </script>
